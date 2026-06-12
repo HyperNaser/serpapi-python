@@ -52,7 +52,7 @@ class SerpResults(UserDict[str, Any]):
     def next_page_url(self) -> Optional[str]:
         """The URL of the next page of results, if any."""
 
-        serpapi_pagination: Optional[dict[str, Any]] = self.data.get("serpapi_pagination")
+        serpapi_pagination: Optional[Dict[str, Any]] = self.data.get("serpapi_pagination")
 
         if serpapi_pagination:
             next_url = serpapi_pagination.get("next")
