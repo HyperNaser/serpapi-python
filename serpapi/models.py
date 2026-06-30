@@ -52,11 +52,10 @@ class SerpResults(UserDict[str, Any]):
     def next_page_url(self) -> Optional[str]:
         """The URL of the next page of results, if any."""
 
-        serpapi_pagination: Optional[Dict[str, Any]] = self.data.get("serpapi_pagination")
+        serpapi_pagination = self.data.get("serpapi_pagination")
 
         if serpapi_pagination:
-            next_url = serpapi_pagination.get("next")
-            return next_url if isinstance(next_url, str) else None
+            return serpapi_pagination.get("next")
         return None
 
     def next_page(self) -> Optional[Union["SerpResults", str]]:
@@ -78,11 +77,11 @@ class SerpResults(UserDict[str, Any]):
         """
 
         current_page_count = 0
-        current_page: Union["SerpResults", str, None] = self
+        current_page = self
         while current_page and current_page_count < max_pages:
             yield current_page
             current_page_count += 1
-            if isinstance(current_page, SerpResults) and current_page.next_page_url:
+            if current_page.next_page_url:
                 current_page = current_page.next_page()
             else:
                 break

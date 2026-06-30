@@ -110,7 +110,7 @@ class Client(HTTPClient):
         r = self.request("GET", f"/searches/{ search_id }", params=params, assert_200=True, **request_kwargs)
         return SerpResults.from_http_response(r, client=self)
 
-    def locations(self, params: Optional[Dict[str, Any]] = None, **kwargs: Any) -> Any:
+    def locations(self, params: Optional[Dict[str, Any]] = None, **kwargs: Any) -> Dict[str, Any]:
         """Get a list of supported Google locations.
 
 
@@ -141,7 +141,7 @@ class Client(HTTPClient):
         )
         return r.json()
 
-    def account(self, params: Optional[Dict[str, Any]] = None, **kwargs: Any) -> Any:
+    def account(self, params: Optional[Dict[str, Any]] = None, **kwargs: Any) -> Dict[str, Any]:
         """Get SerpApi account information.
 
         :param api_key: the API Key to use for SerpApi.com.
